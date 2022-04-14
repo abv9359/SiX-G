@@ -12,115 +12,11 @@ oAuth2Client.setCredentials({refresh_token: refreshToken});
 var otp
 mongoose.connect("mongodb+srv://Alumni:Abhi%40123@six-g.v9upn.mongodb.net/SIX-G?retryWrites=true&w=majority")
 
-
-
 const app=express();
 app.use(express.static('public'))
 app.set("view engine","ejs")
 app.use(bodyparser.urlencoded({extended:true}))
-app.listen(3000,function(){console.log("Welcome to Six-G")})
-
-app.get("/",function(req,res)
-{  res.render('registration')})
-
-
-//res.render("six-g", {user:"Anirudh"})})
-const alumniSchema={
-    name:{type:String ,required:true},
-    email:{type:String,required:true},
-    ph:{type:Number,required:true,min:1000000000,max:9999999999},
-    _id:{type:Number,required:true,unique:true} ,
-    degree:{type:String,required:true} ,
-    industry:{type:String,required:true},
-    pass:{type:String,required:true,minLength:8}}
-const alumni=mongoose.model('alumni',alumniSchema)
-app.post('/',function(req,res){
-
-    
-      const a1=new alumni(req.body)
-      console.log(req.body)
-      alumni.insertMany([a1],function(err){
-          if(err)console.log(err);
-
-          else {
-            
-            oAuth2Client.getAccessToken(function(err,token){
-                if (err){
-                  console.log(err);
-                }
-                else{
-                  console.log("Access Token is ",token);
-                  const transporter = nodemailer.createTransport({
-                    service: 'gmail',
-                    auth: {
-                      type: 'OAuth2',
-                      user: 'abv9359@gmail.com',
-                      cllientId: clientId,
-                      clientSecret: clientSecret,
-                      refreshToken: refreshToken,
-                      accessToken: token, 
-                    }
-                  });
-                  otp= Math.floor(Math.random() * 1000000)
-                  const mailOptions = {
-                    from: 'abv9359@gmail.com',
-                    to: req.body.email,
-                    subject: 'Verification',
-                    html: 'The Verification code is ' + otp
-                  };
-                 
-                  transporter.sendMail(mailOptions, function(error, info){
-                    if (error) {
-                      console.log(error);
-                      
-                    } else {
-                      console.log('Email sent: ' + info.response);
-                      res.sendFile(__dirname+'/Verification.html')
-                      
-                      
-                    }
-                    
-                  });
-                }
-              });
-           } 
-    })
-
-    
-})
- 
-app.post('/verify',function(req,res){
-    if(otp==req.body.code)
-    res.send('Verification Successful')
-    else
-    res.send('Failed')
-})
-/*alumni.deleteMany({_id:{$gte:1}},function(err){
-    if(err)
-    console.log(err);
-    else
-    console.log('deleted successfully')
-})*/
-app.get('/login',function(req,res){ 
-  res.render('six-g')
-})
-app.post('/login',function(req,res){
-  var email=req.body.email
-  var pass=req.body.pass
-  alumni.findOne({email:email},function(err,result){
-    if(err)
-    console.log(err)
-    else {
-      if(result){
-        if(result.pass===pass){
-          res.send('login successfull')
-        }
-        else{res.send('login failed')}
-    }}
-  })
-
-  
-})
+app.listen(3000,function(){console.log("Welcome to SIX-G")})
 
 const studentSchema={name:String ,_id:Number ,graduationYear:Number ,degree:String ,email:String,ph:Number }
 const student=mongoose.model("student",studentSchema)
@@ -151,6 +47,100 @@ const s20=new student({name:'Bruno Charney',_id:195,graduationYear:2018,degree:'
     else
     console.log('deleted successfully')
 })*/
+
+const alumniSchema={
+  name:{type:String ,required:true},
+  email:{type:String,required:true},
+  ph:{type:Number,required:true,min:1000000000,max:9999999999},
+  _id:{type:Number,required:true,unique:true} ,
+  degree:{type:String,required:true} ,
+  industry:{type:String,required:true},
+  pass:{type:String,required:true,minLength:8}}
+const alumni=mongoose.model('alumni',alumniSchema)
+
+app.get("/",function(req,res)
+{  res.render('registration')})
+app.post('/',function(req,res){ 
+     if(student.findById(_id,function(err){})==req.body._id){ 
+      const a1=new alumni(req.body)
+      console.log(req.body)
+      alumni.insertMany([a1],function(err){
+          if(err)console.log(err);
+          else {            
+            oAuth2Client.getAccessToken(function(err,token){
+                if (err){
+                  console.log(err);
+                }
+                else{
+                  console.log("Access Token is ",token);
+                  const transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                      type: 'OAuth2',
+                      user: 'abv9359@gmail.com',
+                      cllientId: clientId,
+                      clientSecret: clientSecret,
+                      refreshToken: refreshToken,
+                      accessToken: token, 
+                    }
+                  });
+                  otp= Math.floor(Math.random() * 1000000)
+                  const mailOptions = {
+                    from: 'abv9359@gmail.com',
+                    to: req.body.email,
+                    subject: 'Verification',
+                    html: 'The Verification code is ' + otp
+                  };                 
+                  transporter.sendMail(mailOptions, function(error, info){
+                    if (error) {
+                      console.log(error);
+                      
+                    } else {
+                      console.log('Email sent: ' + info.response);
+                      res.sendFile(__dirname+'/Verification.ejs')                   
+                      
+                    }
+                    
+                  });
+                }
+              });
+           } 
+    })}
+    else
+    res.send('Invalid User')
+       
+})
+ 
+app.post('/verify',function(req,res){
+    if(otp==req.body.code){
+    res.send('Verification Successful')
+    res.redirect('/login')
+    }
+    else
+    res.send('Failed')
+})
+app.get('/login',function(req,res){ 
+  res.render('six-g')
+})
+app.post('/login',function(req,res){
+  var email=req.body.email
+  var pass=req.body.pass
+  alumni.findOne({email:email},function(err,result){
+    if(err)
+    console.log(err)
+    else {
+      if(result){
+        if(result.pass===pass){
+          res.send('login successfully')
+        }
+        else{res.send('login failed')}
+    }}
+  })
+
+  
+})
+
+
 
 
 
