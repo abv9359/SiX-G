@@ -19,6 +19,10 @@
         <input type="text" name="industry" placeholder="Enter Your Industry"><br>
         <button type="submit" name="submit">Verify</button>
     </form>
-    
+    <% if(register==='failed'){%>
+        <script>alert('Registration failed')</script>
+      <% } else if(register==='pass'){%>
+        <script>alert('Registration Successfull')</script>
+       <%}%>
 </body>
 </html>
