@@ -1,0 +1,73 @@
+.column {
+    float: left;
+    width: 23%;
+    margin-top: 1cm;
+    height:50vh;
+    padding: 0 10px;
+   
+  }
+  
+  /* Remove extra left and right margins, due to padding in columns */
+  .row {margin: 0 -5px;}
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .dashboard{
+      font-size: 1cm;
+      font-weight: bold;
+  }
+  
+  /* Style the counter cards */
+  .card1 {
+    box-shadow: 0px 10px 50px #555; /* this adds the "card" effect */
+    padding: 16px;
+    text-align:start;
+    border-radius: 4px;
+    background-color:rgb(36, 36, 217);
+    height: 40vh;
+    font-size: 0.5cm;
+      font-weight: bold;
+  }
+  .card2 {
+    box-shadow: 0px 10px 50px #555; /* this adds the "card" effect */
+    padding: 16px;
+    text-align:start;
+    border-radius: 4px;
+    background-color:rgb(227, 79, 25);
+    height: 40vh;
+    font-size: 0.5cm;
+      font-weight: bold;
+  }
+  .card3 {
+    box-shadow: 0px 10px 50px #555; /* this adds the "card" effect */
+    padding: 16px;
+    text-align:start;
+    border-radius: 4px;
+    background-color:rgb(228, 228, 16);
+    height: 40vh;
+    font-size: 0.5cm;
+      font-weight: bold;
+  }
+  .card4 {
+    box-shadow: 0px 10px 50px #555; /* this adds the "card" effect */
+    padding: 16px;
+    text-align:start;
+    border-radius: 4px;
+    background-color:lightseagreen;
+    height: 40vh;
+    font-size: 0.5cm;
+      font-weight: bold;
+  }
+  
+  /* Responsive columns - one column layout (vertical) on small screens */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }

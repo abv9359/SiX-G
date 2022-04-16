@@ -1,0 +1,74 @@
+.paxc{
+    background-color: #f1f1f1;
+}
+.container-68 {
+    border-radius: 2px;
+    background-color:  #f1f1f1;
+     
+    border-image-width: initial;
+         background-repeat:no-repeat ;
+    padding: 10px;
+    position: relative;
+    background-size: 100%;
+        background-position :right 10% bottom 45%;
+    
+    
+    
+  }
+.soil6{
+    text-align:start;
+    font-size: 1cm;
+    color: black;
+    font-weight: bolder;
+    padding-left: 90px;
+    padding-top: 40px;
+}
+.advertisment-34{
+    display: flex;
+    height: 66vh;
+}
+.card-text{
+    font-family: system-ui;
+    font-size: 17px;
+}
+.card-46{
+    margin: 30px;
+    padding-inline-start: 50px;
+    padding-inline-end: 50px;
+    height: 60%;
+   
+}
+.button-144 a{
+    background-color:rgb(41, 140, 108);
+    color: white;
+    text-decoration: none;
+}
+.button-144 {
+    background-color:rgb(41, 140, 108);
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    
+    font-size: 16px;
+    margin: 4px 2px;
+    float:left;
+    
+  }
+  .button222 {border-radius: 4px;
+      
+}
+  .poi{
+      text-align: left;
+      color: grey;
+  }
+  .box-8{
+      
+      margin: 17px;
+      
+      
+      padding-top:30px;
+      text-align: left;
+      
+  }

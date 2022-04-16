@@ -3,6 +3,7 @@ const bodyparser=require("body-parser")//collect data
 const mongoose=require("mongoose")
 const nodemailer=require('nodemailer')
 const {google}=require('googleapis')
+const encrypt=require('mongoose-encryption')
 const clientId='765466171662-huo2m0vacre1mda797mmtu76269mgg5r.apps.googleusercontent.com'
 const clientSecret='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'
 const redirectUri='https://developers.google.com/oauthplayground'
@@ -19,7 +20,7 @@ const app=express();
 app.use(express.static('public'))
 app.set("view engine","ejs")
 app.use(bodyparser.urlencoded({extended:true}))
-app.listen(3000,function(){console.log("Welcome to SIX-G")})
+
 
 const studentSchema={name:String ,_id:Number ,graduationYear:Number ,degree:String ,email:String,ph:Number,Institute:String }
 const student=mongoose.model("student",studentSchema)
@@ -32,6 +33,7 @@ const s6=new student({name:'Anjali Talley',_id:15,graduationYear:2020,degree:'As
 const s7=new student({name:'Soumya Jha',_id:475,graduationYear:2023,degree:'Bachelor Of Technology',email:'soumya.jha.0501@gmail.com',ph:9644389085,Institute:'Princeton University'})
 const s8=new student({name:'Brodie Weeks',_id:201,graduationYear:2019,degree:'Bachelor Of Arts',email:'bweeks@newblend.com',ph:2345678901,Institute:'Johns Hopkins University'})
 const s9=new student({name:'Keavy Seymour',_id:256,graduationYear:2022,degree:'Associates',email:'kseymour@newblend.com',ph:2345678901,Institute:'Yale University'})
+const s21=new student({name:'Shubham Lal',_id:10,graduationYear:2018,degree:'Bachelor Of Engineering',email:'mail.shubhamlal@gmail.com',ph:1234567890,Institute:'Birla Institute Of Technology'})
 const s10=new student({name:'Oscar Hickman',_id:95,graduationYear:2021,degree:'Doctorate',email:'ohickman@newblend.com',ph:2345678901,Institute:'University of Toronto'})
 const s11=new student({name:'Armani Navarro',_id:103,graduationYear:2020,degree:'Associates',email:'anavaro@newblend.com',ph:2345678901,Institute:'University of Pennsylvania'})
 const s12=new student({name:'Bella Harrell',_id:275,graduationYear:2021,degree:'Master Of Science',email:'bharrell@newblend.com',ph:2345678901,Institute:'University Of Washington'})
@@ -43,14 +45,15 @@ const s17=new student({name:'Eleni Bernard',_id:578,graduationYear:2020,degreee:
 const s18=new student({name:'Fearne Sutton',_id:127,graduationYear:2021,degree:'Master Of Science',email:'fsutton@newblend.com',ph:2345678901,Institute:'Johns Hopkins University'})
 const s19=new student({name:'Kimberly Cartwright',_id:164,graduationYear:2019,degree:'Bachelor Of Science',email:'kcartwright@newblend.com',ph:2345678901,Institute:'Yale University'})
 const s20=new student({name:'Bruno Charney',_id:195,graduationYear:2018,degree:'Doctorate',email:'bchaney@newblend.com',ph:2345678901,Institute:'Imperial College London'})
-//student.insertMany([s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20],function(err){if(err)console.log(err);else console.log('student collection ready')})
+
+student.insertMany([s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21],function(err){if(err)console.log(err);else console.log('student collection ready')})
 /*student.deleteMany({_id:{$gte:1}},function(err){
     if(err)
     console.log(err);
     else
     console.log('deleted successfully')
 })*/
-const alumniSchema={
+const alumniSchema=new mongoose.Schema({
   name:{type:String ,required:true},
   email:{type:String,required:true},
   ph:{type:Number,required:true,min:1000000000,max:9999999999},
@@ -58,20 +61,43 @@ const alumniSchema={
   _id:{type:Number,required:true} ,
   degree:{type:String,required:true} ,
   industry:{type:String,required:true}
-  }
+  })
+  const secret='ThesecretKeyforencryption'
+  alumniSchema.plugin(encrypt,{secret:secret,encryptedFields:["pass"]})
+
+
 const alumni=mongoose.model('alumni',alumniSchema)
 /*alumni.deleteMany({_id:{$gte:1}},function(err){
   if(err)
   console.log(err);
   else
   console.log('deleted successfully')})*/
+  app.get('/',function(req,res){
+    res.render('welcome')
+  })
+  app.get('/contactus',function(req,res){
+    res.render('contactus')
+  })
+  app.get('/registerpage',function(req,res){
+    res.render('register-page')
+  })
 
-app.get("/",function(req,res)
+  app.get('/admin',function(req,res){
+    res.render('admin')
+  })
+  
+  
+
+app.get("/register",function(req,res)
 {  console.log(register)
   res.render('registration',{register:register})})
 
 
-app.post('/',function(req,res){ 
+  app.post('/institute',function(req,res){
+    res.render('institute')
+  })
+
+app.post('/register',function(req,res){ 
        console.log(req.body)
        var rollno=Number(req.body._id)
        let phno=Number(req.body.ph)
@@ -91,13 +117,13 @@ app.post('/',function(req,res){
     }  else{
         console.log('failed')
       register='failed'   
-      res.redirect('/')
+      res.redirect('/register')
     } 
       
     }})})
     app.get('/login',function(req,res){ 
       res.render('login',{login:login})
-    })
+       })
     
      
     app.post('/login',function(req,res){
@@ -157,10 +183,10 @@ app.post('/',function(req,res){
     
  app.post('/verify',function(req,res){
     if(otp==req.body.code){
-      res.send('done')//res.redirect('/login') not prepared yet dashboard
+      res.render('admin')//res.redirect('/login')  dashboard of alumni
     }
     else
     register='failed'
-    res.redirect('/')
+    res.redirect('/register')
 })
-
+app.listen(3000,function(){console.log("Welcome to SIX-G")})

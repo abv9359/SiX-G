@@ -1,0 +1,158 @@
+.wrapper-9 {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:  #f1f1f1;
+  }
+  
+  .form-wrapper-9 {
+    position: relative;
+  
+   
+    background-color:white;
+    margin-top:2cm;
+    
+    border-radius: 6px;
+    box-shadow: 0px 10px 50px #555;
+    text-align: left;
+   
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+    
+    
+    
+    background-color: #ffffff;
+    font-weight:bolder;
+  }
+  
+  form {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  h1 {
+    text-align: center;
+    width: 100%;
+    color: #111;
+    font-weight: lighter;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  }
+  
+  label {
+    font-size: 1em;
+    margin-bottom: 1cm;
+    color: rgb(5, 1, 1);
+    font-weight:lighter;
+  
+  }
+  
+  input {
+    padding: 10px 10px;
+    border-radius: 5px;
+    outline-color: white;
+   
+  }
+  
+  input::placeholder {
+    font-size: 1.2em;
+    font-weight: lighter;
+    
+  }
+  .name,
+  .branch,
+  .department,
+  .confirm-password,
+  .number,
+  .enrollmentno,
+  .location,
+  .district,
+  .city,
+  .firstname,
+  .lastname,
+  
+  .email,
+.password {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.enrollmentno,
+  .company_name,
+  .branch,
+  .department,
+  .number,
+  .confirm-password,
+  .name,
+  .location,
+  .email,
+  .district,
+  .city,
+  .firstname,
+  .lastname,
+  .password {
+    width: 100%;
+  }
+  
+  .createAccount {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .createAccount button {
+    background-color: #519e8a;
+    color: #fff;
+    border: 2px solid #fff;
+    width: 100%;
+    margin-top: 1em;
+    padding: 8px 0px;
+    font-size: 1em;
+    font-weight: lighter;
+    letter-spacing: 1px;
+    margin-bottom: 0.25em;
+  }
+  
+
+  .blp-9{
+    padding-top: 30px;
+    text-align: center;
+}
+.bnm{
+    font-size: 1cm;
+    font-weight: bold;
+}
+.man{
+    font-size:7mm;
+    font-weight:bold;
+}
+.terms{
+  padding-top: 30px;
+}
+.button-998 {
+  background-color:white;
+  border: none;
+  color: black;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  width:48%;
+  font-size: 16px;
+  margin: 4px 2px;
+  float:left;
+  font-weight: bold;
+  font-size: 6mm;
+  display:flex
+  
+}
+.button341{
+  background-color: rgb(247, 247, 247);
+}

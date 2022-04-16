@@ -1,0 +1,68 @@
+
+  
+.back{
+    
+    
+    width: 100%;
+    background-color:  #cfe271;
+    position: absolute;
+    overflow: hidden;
+   
+
+    
+    
+   border-image-width: initial;
+     background-repeat:no-repeat ;
+    height: 100%;
+    position: absolute;
+    background-size: cover;
+    
+   
+}
+
+
+.boxx2{
+width:49%;
+height:auto;
+background-color:  #cfe271;
+
+
+position:absolute;
+top:250px;
+left:100px;
+overflow:hidden;
+
+
+}
+.text{
+background-color:  #cfe271;
+font-size: 2cm;
+font-style: abel;
+font-style:abel ;
+color:rgb(0, 0, 0);
+font-size:10em;
+font-weight: 400;
+line-height:100%;
+position: relative;
+left:-100%;
+animation: anim3 1s forwards 1.5s;
+
+}
+.text2{
+background-color:  #cfe271;
+font-size: 1cm;
+position: relative;
+left:-100%;
+animation: anim3 1.5s forwards 2.5s;
+
+}
+@keyframes anim3{
+from{
+    left:-100%;
+}
+to{
+    left:0%;
+}
+}
+
+
